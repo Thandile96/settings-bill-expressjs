@@ -1,7 +1,7 @@
 const express = require('express');
 const exphbs  = require('express-handlebars');
 const bodyParser = require('body-parser');
-const moment = require('moment');
+//const moment = require('moment');
 const SettingsBill = require('./settings-bill');
 
 const app = express();
@@ -54,7 +54,7 @@ app.get('/actions', function(req, res){ //show all the actions
 
 app.get('/actions/:actionType', function(req, res){ //display all the sms or call actions
     const actionType = req.params.actionType;
-    let time = moment.format('MM-DD-YYYY');
+    //let time = moment().format('MM-DD-YYYY');
    res.render('actions', {actions: settingsBill.actionsFor(actionType)});
 
 });

@@ -4,6 +4,7 @@ module.exports = function SettingsBill() {
     let callCost;
     let warningLevel;
     let criticalLevel; 
+    var moment = require('moment');
 
     let actionList = [];
 
@@ -25,7 +26,6 @@ module.exports = function SettingsBill() {
     }
 
     function recordAction(action) {
-
         let cost = 0;
         if (action === 'sms'){
             cost = smsCost;
@@ -40,7 +40,8 @@ module.exports = function SettingsBill() {
         actionList.push({
             type: action,
             cost,
-            timestamp: new Date()
+            timestamp: moment().format('dddd MMMM D YYYY h:mm:ss a')
+            //moment().format('dddd MMMM Do YYYY h:mm:ss a')
         });
     }
 
