@@ -14,7 +14,8 @@
     "moment": "^2.29.1"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
