@@ -97,4 +97,39 @@ describe('settings-bill', function(){
         assert.equal(true, settingsBill.hasReachedCriticalLevel());
 
     });
+
+    it('should return a classname of "warning" when warning level is reached', function(){
+        const settingsBill = SettingsBill();
+        settingsBill.setSettings({
+            smsCost: 1.50,
+            callCost: 3.00,
+            warningLevel: 6,
+            criticalLevel: 8
+        });
+
+        settingsBill.recordAction('sms');
+        settingsBill.recordAction('sms');
+        settingsBill.recordAction('call')
+
+        assert.equal("warning", settingsBill.classnames());
+    });
+
+    it('should return a classname of "danger" when critical level is reached', function(){
+        const settingsBill = SettingsBill();
+        settingsBill.setSettings({
+            smsCost: 1.50,
+            callCost: 3.00,
+            warningLevel: 6,
+            criticalLevel: 8
+        });
+
+        settingsBill.recordAction('sms');
+        settingsBill.recordAction('sms');
+        settingsBill.recordAction('call');
+        settingsBill.recordAction('call');
+        settingsBill.recordAction('call')
+        
+
+        assert.equal("danger", settingsBill.classnames());
+    });
 });

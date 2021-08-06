@@ -1,6 +1,7 @@
 const express = require('express');
 const exphbs  = require('express-handlebars');
 const bodyParser = require('body-parser');
+const moment = require('moment');
 const SettingsBill = require('./settings-bill');
 
 const app = express();
@@ -19,8 +20,10 @@ app.use(bodyParser.json())
 app.get('/', function(req, res){ //show homescreen
     res.render('index', {
         settings: settingsBill.getSettings(),
-        totals: settingsBill.totals()
+        totals: settingsBill.totals(),
+        color: settingsBill.classnames()
     });
+    console.log(settingsBill.classnames());
 });
 
 app.post('/settings', function(req, res){//set the settings
@@ -45,13 +48,14 @@ app.post('/action', function(req, res){ //record action for sms or call
 });
 
 app.get('/actions', function(req, res){ //show all the actions
-    res.render('actions', {actions: settingsBill.actions() });
+    res.render('actions', {actions: settingsBill.actions()});
 
 });
 
-app.get('/actions:actionType', function(req, res){ //display all the sms or call actions
+app.get('/actions/:actionType', function(req, res){ //display all the sms or call actions
     const actionType = req.params.actionType;
-    res.render('actions', {actions: settingsBill.actionsFor(actionType) });
+    let time = moment.format('MM-DD-YYYY');
+   res.render('actions', {actions: settingsBill.actionsFor(actionType)});
 
 });
 

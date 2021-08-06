@@ -33,6 +33,9 @@ module.exports = function SettingsBill() {
         else if (action === 'call'){
             cost = callCost;
         }
+        else{
+            return;
+        }
 
         actionList.push({
             type: action,
@@ -76,12 +79,6 @@ module.exports = function SettingsBill() {
         }
         return total;
 
-        // the short way using reduce and arrow functions
-
-        // return actionList.reduce((total, action) => { 
-        //     let val = action.type === type ? action.cost : 0;
-        //     return total + val;
-        // }, 0);
     }
 
     function grandTotal() {
@@ -110,6 +107,14 @@ module.exports = function SettingsBill() {
         const total = grandTotal();
         return total >= criticalLevel;
     }
+    function classnames(){
+        if (hasReachedCriticalLevel()){
+        return "danger"
+        }
+        if (hasReachedWarningLevel()){
+            return "warning"
+        }
+    }
 
     return {
         setSettings,
@@ -119,6 +124,7 @@ module.exports = function SettingsBill() {
         actionsFor,
         totals,
         hasReachedWarningLevel,
-        hasReachedCriticalLevel
+        hasReachedCriticalLevel,
+        classnames
     }
 }
