@@ -1,9 +1,10 @@
 const express = require('express');
 const exphbs  = require('express-handlebars');
 const bodyParser = require('body-parser');
-//const moment = require('moment');
 const SettingsBill = require('./settings-bill');
 
+const moment = require('moment');
+moment().format()
 const app = express();
 const settingsBill = SettingsBill();
 
@@ -48,14 +49,22 @@ app.post('/action', function(req, res){ //record action for sms or call
 });
 
 app.get('/actions', function(req, res){ //show all the actions
-    res.render('actions', {actions: settingsBill.actions()});
+    let theActions = settingsBill.actions();
+    theActions.forEach(element => {
+        element.stampOfTime = moment(element.timestamp).fromNow()
+    });
+    res.render('actions', {actions: theActions});
+
 
 });
 
 app.get('/actions/:actionType', function(req, res){ //display all the sms or call actions
-    const actionType = req.params.actionType;
-    //let time = moment().format('MM-DD-YYYY');
-   res.render('actions', {actions: settingsBill.actionsFor(actionType)});
+    let actionType = req.params.actionType;
+    let theActionType = settingsBill.actionsFor(actionType);
+    theActionType.forEach(element => {
+        element.stampOfTime = moment(element.timestamp).fromNow()
+    });
+   res.render('actions', {actions: theActionType});
 
 });
 

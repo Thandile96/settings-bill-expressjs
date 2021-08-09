@@ -4,7 +4,6 @@ module.exports = function SettingsBill() {
     let callCost;
     let warningLevel;
     let criticalLevel; 
-    var moment = require('moment');
 
     let actionList = [];
 
@@ -36,12 +35,11 @@ module.exports = function SettingsBill() {
         else{
             return;
         }
-
+        
         actionList.push({
             type: action,
             cost,
-            timestamp: moment().format('dddd MMMM D YYYY h:mm:ss a')
-            //moment().format('dddd MMMM Do YYYY h:mm:ss a')
+            timestamp: new Date()
         });
     }
 
@@ -55,16 +53,12 @@ module.exports = function SettingsBill() {
         // loop through all the entries in the action list 
         for (let index = 0; index < actionList.length; index++) {
             const action = actionList[index];
-            // check this is the type we are doing the total for 
             if (action.type === type) {
-                // add the action to the list
                 filteredActions.push(action);
             }
         }
 
         return filteredActions;
-
-        // return actionList.filter((action) => action.type === type);
     }
 
     function getTotal(type) {
@@ -72,9 +66,7 @@ module.exports = function SettingsBill() {
         // loop through all the entries in the action list 
         for (let index = 0; index < actionList.length; index++) {
             const action = actionList[index];
-            // check this is the type we are doing the total for 
             if (action.type === type) {
-                // if it is add the total to the list
                 total += action.cost;
             }
         }
@@ -87,12 +79,12 @@ module.exports = function SettingsBill() {
     }
 
     function totals() {
-        let smsTotal = getTotal('sms')
-        let callTotal = getTotal('call')
+        let smsTotal = getTotal('sms').toFixed(2)
+        let callTotal = getTotal('call').toFixed(2)
         return {
             smsTotal,
             callTotal,
-            grandTotal : grandTotal()
+            grandTotal : grandTotal().toFixed(2)
         }
     }
 
