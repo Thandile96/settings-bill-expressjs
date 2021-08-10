@@ -24,12 +24,9 @@ app.get('/', function(req, res){ //show homescreen
         totals: settingsBill.totals(),
         color: settingsBill.classnames()
     });
-    console.log(settingsBill.classnames());
 });
 
 app.post('/settings', function(req, res){//set the settings
-    console.log(req.body);
-
     settingsBill.setSettings({
         callCost: req.body.callCost,
         smsCost: req.body.smsCost,
