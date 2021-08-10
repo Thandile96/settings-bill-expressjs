@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.com/Thandile96/settings-bill-expressjs.svg?branch=gh-pages)](https://travis-ci.com/Thandile96/settings-bill-expressjs)
