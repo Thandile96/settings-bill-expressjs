@@ -23,7 +23,6 @@ app.get('/', function(req, res){ //show homescreen
         settings: settingsBill.getSettings(),
         totals: settingsBill.totals(),
         color: settingsBill.classnames(),
-        //stopCount: settingsBill.stopTheCount()
     });
 });
 
