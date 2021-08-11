@@ -22,7 +22,8 @@ app.get('/', function(req, res){ //show homescreen
     res.render('index', {
         settings: settingsBill.getSettings(),
         totals: settingsBill.totals(),
-        color: settingsBill.classnames()
+        color: settingsBill.classnames(),
+        //stopCount: settingsBill.stopTheCount()
     });
 });
 
