@@ -4,12 +4,6 @@ const SettingsBill = require('../settings-bill');
 
 describe('settings-bill', function(){
     const settingsBill = SettingsBill();
-
-    it('should be able to record calls', function(){
-        settingsBill.recordAction('call');
-        assert.equal(0, settingsBill.actionsFor('call').length);
-    });
-
     it('should be able to set the settings', function(){
         settingsBill.setSettings({
             smsCost: 2.35,
